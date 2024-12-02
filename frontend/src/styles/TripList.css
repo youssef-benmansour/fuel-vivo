@@ -1,0 +1,37 @@
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .status-planned {
+    background-color: #e6f7ff;
+    color: #1890ff;
+  }
+  
+  .status-in-progress {
+    background-color: #fff7e6;
+    color: #fa8c16;
+  }
+  
+  .status-completed {
+    background-color: #f6ffed;
+    color: #52c41a;
+  }
+  
+  .status-cancelled {
+    background-color: #fff1f0;
+    color: #f5222d;
+  }
+  
+  .error-message {
+    color: #f5222d;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+  }
+  
+  .trip-list h2 {
+    margin-bottom: 20px;
+  }

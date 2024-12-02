@@ -1,0 +1,66 @@
+services:
+  db:
+    build: ./db
+    container_name: fuel_delivery_db
+    environment:
+      POSTGRES_DB: fuel_delivery
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fuel_delivery_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d fuel_delivery"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: fuel_delivery_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+      PGADMIN_CONFIG_CSRF_USE_SESSION: "False"
+      PGADMIN_CONFIG_CSRF_ENABLED: "False"
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - fuel_delivery_network
+    depends_on:
+      db:
+        condition: service_healthy
+
+  backend:
+    build: ./backend
+    container_name: fuel_delivery_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_NAME=fuel_delivery
+      - DB_USER=admin
+      - DB_PASSWORD=adminpassword
+      - DB_HOST=db
+      - DB_PORT=5432
+    networks:
+      - fuel_delivery_network
+    volumes:
+      - ./backend:/app
+      - ./backend/uploads:/app/uploads
+
+networks:
+  fuel_delivery_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pgadmin_data:

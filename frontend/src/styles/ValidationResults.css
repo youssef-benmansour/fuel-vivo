@@ -1,0 +1,55 @@
+.validation-results {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .validation-results:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .validation-results .card-header {
+    font-weight: bold;
+  }
+  
+  .validation-results .list-group-item {
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .validation-results .list-group-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .validation-results .badge {
+    font-size: 0.9rem;
+    padding: 0.4em 0.6em;
+  }
+  
+  .validation-results pre {
+    font-size: 0.85rem;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .validation-results .btn-outline-danger,
+  .validation-results .btn-outline-success {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .validation-results .btn-outline-danger:hover,
+  .validation-results .btn-outline-success:hover {
+    transform: translateY(-2px);
+  }
+  
+  .validation-results .collapse {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  @media (max-width: 768px) {
+    .validation-results .card-body {
+      padding: 1rem;
+    }
+  
+    .validation-results pre {
+      font-size: 0.75rem;
+    }
+  }
